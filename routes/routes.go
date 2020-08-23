@@ -31,7 +31,7 @@ func Routers() *chi.Mux {
 		router.Post("/logout", auth.Logout)
 		router.Post("/refresh/token", auth.Refresh)
 	})
-	r.Get("/swagger/*", httpSwagger.Handler(
+	router.Get("/swagger/*", httpSwagger.Handler(
 		httpSwagger.URL("http://localhost:1323/swagger/doc.json"), //The url pointing to API definition
 	))
 	router.With(auth.TokenAuthMiddleware).Post("/graphql", func(w http.ResponseWriter, r *http.Request) {
